@@ -1,5 +1,6 @@
 import numpy as np # 数值运算，尤其是向量化的运算方式
 import sympy # 符号运算库
+from data_interpolation_01.utils import interp_utils
 
 class Lagrange_Interpolation:
     """
@@ -40,11 +41,22 @@ class Lagrange_Interpolation:
             for j in range(i+1, self.n):
                 basis_fun *= (t - self.x[j])/(self.x[i] - self.x[j])
             self.polynomial += basis_fun # 插值多项式累加
-        print(self.polynomial)
+        # self.polynomial = sympy.simplify(self.polynomial) # 对多项式进行简化
+        self.polynomial = sympy.expand(self.polynomial) # 多项式展开
+        polynomial = sympy.Poly(self.polynomial, t) # 根据多项式对象
+        self.poly_coefficient = polynomial.coeffs() # 获取多项式系数
+        self.coefficient_order = polynomial.monoms() # 多项式对应对阶次
+        # print(self.polynomial)
+
     def cal_interp_x0(self, x0):
+        self.y0 = interp_utils.cal_interp_x0(self.polynomial, x0)
+        return self.y0
+
+    def plt_interpolation(self, x0=None, y0=None):
         """
-        计算所给定的插值点的数值，即插值
-        :param x0: 所求插值点的x坐标
+        :param x0:
+        :param y0:
         :return:
         """
-        pass
+        params = (self.polynomial, self.x, self.y, "Lagrange", x0, y0)
+        interp_utils.plt_interpolation(params)
