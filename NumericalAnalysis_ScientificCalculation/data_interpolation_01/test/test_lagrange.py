@@ -6,10 +6,10 @@ if __name__ == '__main__':
     # y = np.sin(x)
 
     # interpolation base points
-    x = []
-    y = [] # 或使用原始方程计算数据基本点
+    x = np.linspace(0, 24, 13, endpoint=True)
+    y = np.array([12, 9, 9, 10, 18, 24, 28, 27, 25, 20, 18, 15, 13]) # 或使用原始方程计算数据基本点
     # interpolation point
-    x0 = np.array([np.pi/2, 2.158, 3.58, 4.784])
+    x0 = np.array([1, 10.5, 13, 18.7, 22.3])
 
     lag_interp = Lagrange_Interpolation(x=x, y=y)
     lag_interp.fit_interp()
