@@ -67,7 +67,7 @@ A = np.vstack([np.hstack(A_i) for A_i in A_blc])  # 组装得到矩阵A
 
 x_i = np.linspace(0, a, M + 1)
 y_i = np.linspace(0, b, N + 1)
-F = np.vstack([-2 * np.pi ** 2 * np.sin(np.pi * x_i[1:M].reshape((M - 1, 1))) * np.sin(np.pi * j) for j in y_i[1:N]])
+F = np.vstack([-2*np.pi**2 * np.sin(np.pi*x_i[1:M].reshape((M-1, 1))) * np.sin(np.pi*j) for j in y_i[1:N]])
 
 u = np.dot(np.linalg.inv(A), F).reshape(M - 1, N - 1)
 u_f = np.vstack([np.zeros((1, M + 1)),  # 最后组装边界条件得到全域的解

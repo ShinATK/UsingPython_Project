@@ -49,7 +49,11 @@ def Charge_Distribution(V_list, sigma):
 # plt.show()
 
 V_list = np.arange(-2, 0, 0.01)
+# V_list = [0]
+CD_list = dict()
 for each in np.arange(50, 200, 50):
-    plt.plot(V_list, Charge_Distribution(V_list, each), label=f'sigma={each} meV')
+    CD_list[each] = Charge_Distribution(V_list, each)
+    plt.plot(V_list, CD_list[each], label=f'sigma={each} meV')
 plt.legend()
 plt.show()
+
