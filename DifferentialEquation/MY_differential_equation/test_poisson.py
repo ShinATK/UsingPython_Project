@@ -9,7 +9,7 @@ E0 = -5.0 # 单位：eV
 Ef = -4.28 # 单位：eV
 
 Nt = 1e25
-sigma = 50 # 单位：meV
+sigma = 0.1 # 单位：eV
 
 eps = 8.85e-12
 eps_dielec = 3.5
@@ -30,7 +30,7 @@ def Gaussion(E, sigma, V=0):
     return a*np.exp(x)
 
 def Intergrate_GaussFemi(E, V, sigma):
-    return Femi_Distribution(E)*Gaussion(E, sigma*1e-3, V=V)
+    return Femi_Distribution(E)*Gaussion(E, sigma, V=V)
 
 def Charge_Distribution(V_list, sigma):
     n_list = []
@@ -48,12 +48,30 @@ def Charge_Distribution(V_list, sigma):
 # plt.plot(E, Gaussion(E, 5))
 # plt.show()
 
-V_list = np.arange(-2, 0, 0.01)
-# V_list = [0]
-CD_list = dict()
-for each in np.arange(50, 200, 50):
-    CD_list[each] = Charge_Distribution(V_list, each)
-    plt.plot(V_list, CD_list[each], label=f'sigma={each} meV')
+# 积分后，电荷浓度图像
+# V_list = np.arange(-2, 0, 0.01)
+# # V_list = [0]
+# CD_list = dict()
+# for each in np.arange(50, 200, 50):
+#     CD_list[each] = Charge_Distribution(V_list, each)
+#     plt.plot(V_list, CD_list[each], label=f'sigma={each} meV')
+# plt.legend()
+# plt.show()
+
+# 积分前，原函数随能级分布图
+Vg = 0
+plt.figure(figsize=(8, 6))
+for each in [0.1, 0.01, 0.001]:
+    E = np.arange(-5, -4.2, each)
+    femi_func = Femi_Distribution(E)
+    gauss_func = Gaussion(E, sigma, Vg)
+    origin_func = Intergrate_GaussFemi(E, Vg, sigma)
+    # plt.plot(E, gauss_func, label=f'gauss_func dE = {each} eV')
+    # plt.plot(E, femi_func, label=f'femi_func dE = {each} eV')
+    plt.plot(E, origin_func, label=f'GaussFemi dE = {each} eV')
 plt.legend()
+plt.tight_layout()
 plt.show()
+
+
 
