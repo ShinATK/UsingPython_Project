@@ -69,6 +69,7 @@ for each in [0.1, 0.01, 0.001]:
     # plt.plot(E, gauss_func, label=f'gauss_func dE = {each} eV')
     # plt.plot(E, femi_func, label=f'femi_func dE = {each} eV')
     plt.plot(E, origin_func, label=f'GaussFemi dE = {each} eV')
+
 plt.legend()
 plt.tight_layout()
 plt.show()
