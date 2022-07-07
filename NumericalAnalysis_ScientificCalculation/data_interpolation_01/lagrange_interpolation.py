@@ -40,7 +40,8 @@ class Lagrange_Interpolation:
                 basis_fun *= (t - self.x[j])/(self.x[i] - self.x[j])
             for j in range(i+1, self.n):
                 basis_fun *= (t - self.x[j])/(self.x[i] - self.x[j])
-            self.polynomial += basis_fun # 插值多项式累加
+            # 插值多项式累加，构造插值多项式
+            self.polynomial += basis_fun
         # self.polynomial = sympy.simplify(self.polynomial) # 对多项式进行简化
         self.polynomial = sympy.expand(self.polynomial) # 多项式展开
         polynomial = sympy.Poly(self.polynomial, t) # 根据多项式对象
