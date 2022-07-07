@@ -6,7 +6,6 @@ def Newton_Interpolation(x, y):
     x= np.array(x, dtype=np.float64)
     y= np.array(y, dtype=np.float64)
     n = len(x)
-    
     # 均差计算
     mean_differ = np.zeros(n)
     for i in range(n):
