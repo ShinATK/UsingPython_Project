@@ -20,6 +20,8 @@ def theta(t, delta_t, THETA_0, THETA_DOT_0):
     theta_dot = THETA_DOT_0
     # delta_t = 0.01 # Some time stop
     theta_list = []
+    theta_dot_list = []
+    theta_double_dot_list = []
     for time in np.arange(0, t, delta_t):
         theta_double_dot = get_theta_double_dot(
             theta, theta_dot
@@ -27,7 +29,9 @@ def theta(t, delta_t, THETA_0, THETA_DOT_0):
         theta += theta_dot * delta_t
         theta_dot += theta_double_dot * delta_t
         theta_list.append(theta)
-    return theta_list
+        theta_dot_list.append(theta_dot)
+        theta_double_dot_list.append(theta_double_dot)
+    return theta_list, theta_dot_list, theta_double_dot_list
 
 if __name__ == '__main__':
 
@@ -37,6 +41,7 @@ if __name__ == '__main__':
     delta_t = 0.01
 
     t = np.arange(0, final_t, delta_t)
+    theta_list, theta_dot_list, theta_double_dot_list = theta(final_t, delta_t, theta_0, theta_dot_0)
     plt.figure(figsize=(8, 6))
-    plt.plot(t, theta(final_t, delta_t, theta_0, theta_dot_0))
+    plt.plot(t, theta_list, label='theta&time')
     plt.show()
