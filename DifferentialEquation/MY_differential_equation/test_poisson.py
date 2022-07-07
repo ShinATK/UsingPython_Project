@@ -48,7 +48,6 @@ def Charge_Distribution(V_list, sigma):
 # plt.plot(E, Gaussion(E, 5))
 # plt.show()
 
-<<<<<<< Updated upstream
 # 积分后，电荷浓度图像
 # V_list = np.arange(-2, 0, 0.01)
 # # V_list = [0]
@@ -70,14 +69,7 @@ for each in [0.1, 0.01, 0.001]:
     # plt.plot(E, gauss_func, label=f'gauss_func dE = {each} eV')
     # plt.plot(E, femi_func, label=f'femi_func dE = {each} eV')
     plt.plot(E, origin_func, label=f'GaussFemi dE = {each} eV')
-=======
-V_list = np.arange(-20, 0, 0.01)
-# V_list = [0]
-CD_list = dict()
-for each in np.arange(50, 200, 50):
-    CD_list[each] = Charge_Distribution(V_list, each)
-    plt.plot(V_list, CD_list[each], label=f'sigma={each} meV')
->>>>>>> Stashed changes
+
 plt.legend()
 plt.tight_layout()
 plt.show()
