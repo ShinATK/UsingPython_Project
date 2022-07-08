@@ -2,7 +2,7 @@ import numpy as np
 import sympy
 import matplotlib.pyplot as plt
 
-def Newton_Interpolation(x, y):
+def Mean_Differ(x, y):
     x= np.array(x, dtype=np.float64)
     y= np.array(y, dtype=np.float64)
     n = len(x)
@@ -17,6 +17,32 @@ def Newton_Interpolation(x, y):
     sum = mean_differ.sum()
     return sum
 
+def Newton_Interpolation(x, y, mean_differ, k):
+    x = np.array(x, dtype=np.float64)
+    y = np.array(y, dtype=np.float64)
+    n = len(x)
+    t = sympy. Symbol('t')
+    result = mean_differ
+    for i in range(n):
+        for j in range(i):
+            result[i] *= (t - x[j])
+    Polynomial = 0.0
+    for each in result[:k]:
+        Polynomial += each
+
+    return Polynomial
+
+def cal_interp_0(polynomial, x0):
+
+    x0 = np.array(x0, dtype=np.float64)
+    n = len(x0)
+    y0 = np.zeros(n)
+
+    t = polynomial.free_symbols.pop()  # 获取插值多项式的自由变量
+    for k in range(n):
+        y0[k] = polynomial.evalf(subs={t: x0[k]})
+    return y0
+
 if __name__ == '__main__':
 
     x = [0.40, 0.55, 0.65, 0.80, 0.90, 1.05]
@@ -24,6 +50,12 @@ if __name__ == '__main__':
     n = len(x)
     mean_differ = [None for _ in x]
     for each in range(n):
-        mean_differ[each] = Newton_Interpolation(x[:each+1], y[:each+1])
-
+        mean_differ[each] = Mean_Differ(x[:each+1], y[:each+1])
     print(mean_differ)
+
+
+    x0 = [0.596]
+    polynomial = Newton_Interpolation(x, y, mean_differ, k=4)
+    result = cal_interp_0(polynomial, x0)
+    print(result)
+    print(sympy.factor(mean_differ)) # 分解因式
