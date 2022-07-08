@@ -1,9 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+# 给出原函数及其一阶导数
 def origin_f(x):
     return x**2 +x +1
-
 def de_origin_f(x):
     return 2* x +1
 
@@ -12,9 +12,12 @@ def newton(xk, function_name, function_dot_name, error=1e-5):
     fn = function_name
     fn_dot = function_dot_name
     i = 0
+
+    # 迭代，牛顿二分法
     while True:
         yk = fn(xk)
         yk_dot = fn_dot(xk)
+        # 指定误差范围，和最大循环上限，防止无意义的循环计算
         if abs(yk) <= error or i == 50:
             break
         xk_1 = xk - yk / yk_dot

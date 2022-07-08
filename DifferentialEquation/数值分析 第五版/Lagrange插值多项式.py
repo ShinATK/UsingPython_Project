@@ -10,6 +10,7 @@ def Lagrnage_Interpolation(x, y):
     t = sympy.Symbol('t')
     polynomial = 0.0
 
+    # 拉格朗日插值法主题部分
     for i in range(n):
         basis_func = y[i]
         for j in range(i):

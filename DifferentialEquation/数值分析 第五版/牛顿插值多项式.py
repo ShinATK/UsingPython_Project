@@ -6,6 +6,7 @@ def Mean_Differ(x, y):
     x= np.array(x, dtype=np.float64)
     y= np.array(y, dtype=np.float64)
     n = len(x)
+
     # 均差计算
     mean_differ = np.zeros(n)
     for i in range(n):
@@ -15,6 +16,7 @@ def Mean_Differ(x, y):
             y[i] *= 1/(x[i] - x[j])
         mean_differ[i] += y[i]
     sum = mean_differ.sum()
+
     return sum
 
 def Newton_Interpolation(x, y, mean_differ, k):
@@ -23,10 +25,13 @@ def Newton_Interpolation(x, y, mean_differ, k):
     n = len(x)
     t = sympy. Symbol('t')
     result = mean_differ
+
+    # 牛顿插值迭代公式
     for i in range(n):
         for j in range(i):
             result[i] *= (t - x[j])
     Polynomial = 0.0
+    # 各阶差分储存在列表result中
     for each in result[:k]:
         Polynomial += each
 
@@ -38,7 +43,8 @@ def cal_interp_0(polynomial, x0):
     n = len(x0)
     y0 = np.zeros(n)
 
-    t = polynomial.free_symbols.pop()  # 获取插值多项式的自由变量
+    # 获取插值多项式的自由变量
+    t = polynomial.free_symbols.pop()
     for k in range(n):
         y0[k] = polynomial.evalf(subs={t: x0[k]})
     return y0
