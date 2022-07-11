@@ -14,12 +14,12 @@ def Mean_Differ(x, y):
             if i == j:
                 continue
             y[i] *= 1/(x[i] - x[j])
-        mean_differ[i] += y[i]
+        mean_differ[i] = y[i]
     sum = mean_differ.sum()
 
     return sum
 
-def Newton_Interpolation(x, y, mean_differ, k):
+def Newton_Interpolation(x, y, mean_differ, k=-1):
     x = np.array(x, dtype=np.float64)
     y = np.array(y, dtype=np.float64)
     n = len(x)
