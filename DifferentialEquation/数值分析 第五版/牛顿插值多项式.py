@@ -49,8 +49,10 @@ def cal_interp_0(polynomial, x0):
         y0[k] = polynomial.evalf(subs={t: x0[k]})
     return y0
 
-if __name__ == '__main__':
+def origin_func(x):
+    return 1/(1+x**2)
 
+if __name__ == '__main__':
     x = [0.40, 0.55, 0.65, 0.80, 0.90, 1.05]
     y = [0.41075, 0.57815, 0.69675, 0.88811, 1.02652, 1.25382]
     n = len(x)
