@@ -23,7 +23,7 @@ def Newton_Interpolation(x, y, mean_differ, k=-1):
     x = np.array(x, dtype=np.float64)
     y = np.array(y, dtype=np.float64)
     n = len(x)
-    t = sympy. Symbol('t')
+    t = sympy.Symbol('t')
     result = mean_differ
 
     # 牛顿插值迭代公式
